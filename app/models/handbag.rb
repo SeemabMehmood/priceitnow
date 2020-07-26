@@ -24,6 +24,19 @@ class Handbag < ApplicationRecord
     pluck(:height).reject(&:blank?).uniq.sort.delete_if { |n| n==0 }
   end
 
+  def min_price
+    prices.pluck(:price).map(&:to_i).min
+  end
+
+  def max_price
+    prices.pluck(:price).map(&:to_i).max
+  end
+
+  def avg_price
+    plucked_prices = self.prices.pluck(:price).map(&:to_i)
+    plucked_prices.sum / plucked_prices.length
+  end
+
   def self.filter_by(params)
     handbags = []
     handbags = self.where('name LIKE ?', "%#{params["brand"]}%") if params["brand"].present?
