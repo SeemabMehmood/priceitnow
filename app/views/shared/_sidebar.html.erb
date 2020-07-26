@@ -1,0 +1,41 @@
+<nav class="pcoded-navbar">
+  <div class="navbar-wrapper">
+    <div class="navbar-brand header-logo">
+      <a href="index.html" class="b-brand">
+        <div class="b-bg">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <span class="b-title">PriceItNow</span>
+      </a>
+      <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
+    </div>
+    <div class="navbar-content scroll-div ps ps--active-y">
+      <ul class="nav pcoded-inner-navbar">
+        <li class="nav-item active pcoded-trigger">
+          <%= link_to root_path, class: "nav-link" do %>
+            <span class="pcoded-micon">
+              <i class="fa fa-home"></i>
+            </span>
+            <span class="pcoded-mtext">Dashboard</span>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to handbags_path, class: "nav-link" do %>
+            <span class="pcoded-micon">
+              <i class="fas fa-th-list"></i>
+            </span>
+            <span class="pcoded-mtext">Filter Handbags Data</span>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "#!", class: "nav-link" do %>
+            <span class="pcoded-micon">
+              <i class="fa fa-users"></i>
+            </span>
+            <span class="pcoded-mtext">Users</span>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

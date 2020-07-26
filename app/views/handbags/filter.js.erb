@@ -1,0 +1,6 @@
+<% if @handbags.present? %>
+  $('#results').html("<%= j render 'results', handbags: @handbags %>");
+  $('#filtered_results').DataTable();
+<% else %>
+  $('#results').html("<p>No handbags found.</p>");
+<% end %>

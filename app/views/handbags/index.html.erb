@@ -1,0 +1,66 @@
+<div class="pcoded-main-container">
+  <div class="pcoded-wrapper">
+    <div class="pcoded-content">
+      <div class="pcoded-inner-content">
+        <div class="main-body">
+          <div class="page-wrapper">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h5>Filter Handbags Data</h5>
+                    <div class="card-header-right"></div>
+                  </div>
+                  <div class="card-block">
+                    <%= form_tag filter_handbags_path, method: :post, remote: true do %>
+                      <div class="row">
+                        <div class="col-xl-3 col-md-4" data-select2-id="40">
+                          <h6>Brand</h6>
+                          <%= select_tag :brand, options_for_select(Handbag::BRAND.sort), prompt: 'Select', class: "form-control select2 col-sm-12" %>
+                        </div>
+                        <div class="col-xl-3 col-md-3" data-select2-id="40">
+                          <h6>Model</h6>
+                          <%= select_tag :model, options_for_select(Handbag.models), class: "form-control select2 col-sm-12", multiple: true %>
+                        </div>
+                        <div class="col-xl-2 col-md-2" data-select2-id="40">
+                          <h6>Color</h6>
+                          <%= select_tag :color, options_for_select(Handbag.colors), class: "form-control select2 col-sm-12", multiple: true %>
+                        </div>
+                        <div class="col-xl-4 col-md-3" data-select2-id="40">
+                          <div class="row">
+                            <div class="col-sm-4">
+                              <h6>Length (cm)</h6>
+                              <%= select_tag :length, options_for_select(Handbag.lengths), prompt: 'Select', class: "form-control select2" %>
+                            </div>
+                            <div class="col-sm-4">
+                              <h6>Width (cm)</h6>
+                              <%= select_tag :width, options_for_select(Handbag.widths), prompt: 'Select', class: "form-control select2" %>
+                            </div>
+                            <div class="col-sm-4">
+                              <h6>Height (cm)</h6>
+                              <%= select_tag :height, options_for_select(Handbag.heights), prompt: 'Select', class: "form-control select2" %>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mt-3">
+                        <div class="col-12">
+                          <div class="float-right">
+                            <%= submit_tag "Filter", class: "btn btn-primary" %>
+                            <%= link_to "Reset", handbags_path, class: "btn btn-light" %>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+
+                    <div id="results"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

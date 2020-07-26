@@ -12,5 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require vendor-all.min
+//= require jquery-ui
+//= require bootstrap.min
+//= require jquery.scrollbar.min
+//= require SmoothScroll
+//= require pcoded
+//= require select2-full
+//= require datatables.min
+//= require custom
 //= require turbolinks
-//= require_tree .

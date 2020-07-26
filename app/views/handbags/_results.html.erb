@@ -1,0 +1,34 @@
+<div class="table-responsive mt-3">
+  <table class="display table nowrap table-striped table-hover dataTable" id="filtered_results">
+    <thead>
+      <tr>
+        <th scope="col" class="sort" data-sort="reference_no">Reference No</th>
+        <th scope="col" class="sort" data-sort="name">Name</th>
+        <th scope="col">Color</th>
+        <th scope="col">Cost</th>
+        <th scope="col">Model</th>
+        <th scope="col">Material</th>
+        <th scope="col">Length(cm)</th>
+        <th scope="col">Width(cm)</th>
+        <th scope="col">Height(cm)</th>
+        <th scope="col">Website</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% handbags.each do |handbag| %>
+        <tr>
+          <td><%= handbag.reference_no %></td>
+          <td><%= handbag.name %></td>
+          <td><%= handbag.color %></td>
+          <td><%= handbag.cost %></td>
+          <td><%= handbag.model %></td>
+          <td><%= handbag.material %></td>
+          <td><%= handbag.length %></td>
+          <td><%= handbag.width %></td>
+          <td><%= handbag.height %></td>
+          <td><%= handbag.website %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
