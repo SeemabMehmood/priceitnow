@@ -1,6 +1,5 @@
 class Handbag < ApplicationRecord
-  has_one_attached :image
-  has_many :prices
+  has_many :prices, dependent: :destroy
 
   BRAND = ["Alaïa", "Alexander McQueen", "Alexander Wang", "Balenciaga", "Berluti", "Bottega Veneta", "Bulgari", "Burberry", "Cartier", "Celine", "Chanel", "Chloé", "Christian Louboutin", "Dior", "Dolce & Gabbana", "Fauré Le Page", "Fendi", "Givenchy", "Goyard", "Gucci", "Hermès", "Jerome Dreyfuss", "John Galliano", "Lanvin", "Loewe", "Louis Vuitton", "Marc Jacobs", "Marni", "Miu Miu", "Moreau", "Mulberry", "Prada", "Ralph Lauren", "Renaud Pellegrino", "Rimowa", "Roger Vivier", "Saint Laurent", "Salvatore Ferragamo", "Stella McCartney", "Tod's", "Valentino Garavani", "Versace"]
 
