@@ -1,6 +1,27 @@
 <% if @handbags.present? %>
   $('#results').html("<%= j render 'results', handbags: @handbags %>");
   $('#filtered_results').DataTable();
+
+  var price_chart = document.getElementById("price_chart").getContext('2d');
+  var theme_g1 = price_chart.createLinearGradient(0,0,500,0);
+  theme_g1.addColorStop(0,'rgba(29, 233, 182, 0.4)');
+  theme_g1.addColorStop(1,'rgba(29, 196, 233, 0.5)');
+  var data1 = {
+                labels: [0, <%= @min_price %>, <%= @avg_price %>, <%= @max_price %>],
+                datasets: [
+                  {
+                    label: "<%= params['brand'] || params['model'] %>",
+                    data: <%= @prices_data %>,
+                    fill: false,
+                    borderWidth: 4,
+                    borderColor: "#04a9f5",
+                    backgroundColor:"#04a9f5",
+                    tooltips: {
+                      enabled: false
+                    }
+                  }]
+                };
+  var new_price_chart = new Chart(price_chart, { type: 'line', data: data1, responsive: true });
 <% else %>
   $('#results').html("<p>No handbags found.</p>");
 <% end %>

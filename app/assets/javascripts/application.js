@@ -20,5 +20,6 @@
 //= require pcoded
 //= require select2-full
 //= require datatables.min
+//= require Chart.min
 //= require custom
 //= require turbolinks
