@@ -40,11 +40,46 @@ class Handbag < ApplicationRecord
   def self.filter_by(params)
     handbags = []
     handbags = self.where('name LIKE ?', "%#{params["brand"]}%") if params["brand"].present?
-    handbags = handbags.any? ? handbags.where(model: params["model"]) : self.where(model: params["model"]) if params["model"].present?
-    handbags = handbags.any? ? handbags.where(color: params["color"]) : self.where(color: params["color"]) if params["color"].present?
-    handbags = handbags.any? ? handbags.where(color: params["length"]) : self.where(length: params["length"].to_i) if params["length"].present?
-    handbags = handbags.any? ? handbags.where(color: params["height"]) : self.where(height: params["height"].to_i) if params["height"].present?
-    handbags = handbags.any? ? handbags.where(color: params["width"]) : self.where(width: params["width"].to_i) if params["width"].present?
-    handbags
+    return handbags if handbags.blank? && params["brand"].present?
+    if params["model"].present?
+      if handbags.any?
+        handbags = handbags.where(model: params["model"])
+        return handbags if handbags.blank?
+      else
+       handbags = self.where(model: params["model"])
+      end
+    end
+    if params["color"].present?
+      if handbags.any?
+        handbags = handbags.where(color: params["color"])
+        return handbags if handbags.blank?
+      else
+       handbags = self.where(color: params["color"])
+      end
+    end
+    if params["length"].present?
+      if handbags.any?
+        handbags = handbags.where(length: params["length"])
+        return handbags if handbags.blank?
+      else
+        handbags = self.where(length: params["length"].to_i)
+      end
+    end
+    if params["height"].present?
+      if handbags.any?
+        handbags = handbags.where(height: params["height"])
+        return handbags if handbags.blank?
+      else
+        handbags = self.where(height: params["height"].to_i)
+      end
+    end
+    if params["width"].present?
+      if handbags.any?
+        handbags = handbags.where(width: params["width"])
+      else
+       handbags = self.where(width: params["width"].to_i)
+      end
+    end
+    handbags.includes(:prices)
   end
 end
