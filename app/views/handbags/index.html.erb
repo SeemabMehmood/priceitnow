@@ -24,7 +24,7 @@
                         </div>
                         <div class="col-xl-2 col-md-2" data-select2-id="40">
                           <h6>Color</h6>
-                          <%= select_tag :color, options_for_select(Handbag.colors), class: "form-control select2 col-sm-12", multiple: true %>
+                          <%= select_tag :color, options_for_select(Handbag.colors.map {|c| [c.titleize, c]}), class: "form-control select2 col-sm-12", multiple: true %>
                         </div>
                         <div class="col-xl-4 col-md-3" data-select2-id="40">
                           <div class="row">
