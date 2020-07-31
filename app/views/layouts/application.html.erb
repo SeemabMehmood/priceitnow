@@ -14,10 +14,8 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
-    <%= render 'shared/sidebar' %>
+    <%= render 'shared/sidebar' if current_user %>
+    <%= render 'shared/header'  if current_user %>
     <%= yield %>
   </body>
 </html>
