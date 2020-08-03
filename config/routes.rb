@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   resources :handbags, only: [:index] do
     collection do
       get :dashboard
-      post :filter
+      get :filter
+      post :filter_results
     end
   end
 

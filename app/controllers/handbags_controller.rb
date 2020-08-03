@@ -5,7 +5,7 @@ class HandbagsController < ApplicationController
   def dashboard
   end
 
-  def filter
+  def filter_results
     @handbags = Handbag.filter_by(params)
     @max_price = @handbags.map { |h| h.max_price }.max
     @min_price = @handbags.map { |h| h.min_price }.min

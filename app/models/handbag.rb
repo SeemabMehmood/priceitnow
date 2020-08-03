@@ -39,11 +39,11 @@ class Handbag < ApplicationRecord
   def self.filter_by(params)
     handbags = []
     handbags = self.where('name LIKE ?', "%#{params["brand"]}%") if params["brand"].present?
-    return handbags if handbags.blank? && params["brand"].present?
+    return [] if handbags.blank? && params["brand"].present?
     if params["model"].present?
       if handbags.any?
         handbags = handbags.where(model: params["model"])
-        return handbags if handbags.blank?
+        return [] if handbags.blank?
       else
        handbags = self.where(model: params["model"])
       end
@@ -51,7 +51,7 @@ class Handbag < ApplicationRecord
     if params["color"].present?
       if handbags.any?
         handbags = handbags.where(color: params["color"])
-        return handbags if handbags.blank?
+        return [] if handbags.blank?
       else
        handbags = self.where(color: params["color"])
       end
@@ -59,7 +59,7 @@ class Handbag < ApplicationRecord
     if params["length"].present?
       if handbags.any?
         handbags = handbags.where(length: params["length"])
-        return handbags if handbags.blank?
+        return [] if handbags.blank?
       else
         handbags = self.where(length: params["length"].to_i)
       end
@@ -67,7 +67,7 @@ class Handbag < ApplicationRecord
     if params["height"].present?
       if handbags.any?
         handbags = handbags.where(height: params["height"])
-        return handbags if handbags.blank?
+        return [] if handbags.blank?
       else
         handbags = self.where(height: params["height"].to_i)
       end
@@ -79,6 +79,6 @@ class Handbag < ApplicationRecord
        handbags = self.where(width: params["width"].to_i)
       end
     end
-    handbags.includes(:prices)
+    handbags.any? ? handbags.includes(:prices) : []
   end
 end
