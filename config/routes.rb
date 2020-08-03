@@ -9,4 +9,7 @@ Rails.application.routes.draw do
       post :filter
     end
   end
+
+  get '/users', to: 'users#index'
+  delete '/user/:id/destroy', to: 'users#destroy', as: :destroy_user
 end

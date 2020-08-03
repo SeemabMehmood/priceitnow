@@ -19,7 +19,7 @@
             <span class="pcoded-mtext">Dashboard</span>
           <% end %>
         </li>
-        <li class="nav-item <%= 'active' if params[:action].eql?('index') %>">
+        <li class="nav-item <%= 'active' if params[:controller].eql?('handbags') && params[:action].eql?('index') %>">
           <%= link_to handbags_path, class: "nav-link" do %>
             <span class="pcoded-micon">
               <i class="fas fa-th-list"></i>
@@ -29,7 +29,7 @@
         </li>
         <% if current_user.admin? %>
           <li class="nav-item <%= 'active' if params[:controller].eql?('users') %>">
-            <%= link_to "#!", class: "nav-link" do %>
+            <%= link_to users_path, class: "nav-link" do %>
               <span class="pcoded-micon">
                 <i class="fa fa-users"></i>
               </span>
