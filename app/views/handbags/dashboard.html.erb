@@ -1,0 +1,53 @@
+<div class="pcoded-main-container">
+  <div class="pcoded-wrapper">
+    <div class="pcoded-content">
+      <div class="pcoded-inner-content">
+        <div class="main-body">
+          <div class="page-wrapper">
+            <div class="row">
+              <div class="col-md-6 col-xl-4">
+                <div class="card">
+                  <div class="card-block border-bottom">
+                    <div class="row d-flex align-items-center">
+                      <div class="col-auto">
+                        <i class="fas fa-shopping-bag f-30 text-c-green"></i>
+                      </div>
+                      <div class="col">
+                        <h3 class="f-w-300"><%= @total_handbags %></h3>
+                        <span class="d-block text-uppercase">total handbags</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-block">
+                    <div class="row d-flex align-items-center">
+                      <div class="col-auto">
+                        <i class="fas fa-chart-bar f-30 text-c-blue"></i>
+                      </div>
+                      <div class="col">
+                        <h3 class="f-w-300"><%= @updated_prices %></h3>
+                        <span class="d-block text-uppercase">handbags with updated price</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <% if current_user.admin? %>
+                <div class="col-md-12 col-xl-4">
+                  <div class="card theme-bg visitor">
+                    <div class="card-block text-center">
+                      <%= image_tag  "user-1.png", class: "img-female", alt: "visitor-user" %>
+                      <h5 class="text-white m-0">TOTAL VISITORS</h5>
+                      <h3 class="text-white m-t-10 f-w-300"><%= @total_visitors %></h3>
+                      <%= image_tag  "user-2.png", class: "img-men", alt: "visitor-user" %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :handbags, only: [:index] do
+  resources :handbags, only: [:index, :show] do
     collection do
       get :dashboard
       get :filter

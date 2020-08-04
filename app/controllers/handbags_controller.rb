@@ -3,6 +3,16 @@ class HandbagsController < ApplicationController
   before_action :authenticate_user!
 
   def dashboard
+    @total_handbags = Handbag.count
+    @updated_prices = Handbag.includes(:prices).select { |h| h.prices.length > 1 }.length
+    @total_visitors = User.count
+  end
+
+  def index
+    @handbags = Handbag.all.includes(:prices).order('created_at DESC')
+  end
+
+  def show
   end
 
   def filter_results
