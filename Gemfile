@@ -16,9 +16,11 @@ gem 'jbuilder', '~> 2.5'
 gem 'roo', '~> 2.8.0'
 gem 'devise'
 gem 'select2-rails'
+gem 'nokogiri'
 
 group :development, :test do
   gem 'byebug', platform: :mri
+  gem 'pry'
 end
 
 group :development do
