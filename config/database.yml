@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: priceitnow_production
-  username: priceitnow
-  password: <%= ENV['PRICEITNOW_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
