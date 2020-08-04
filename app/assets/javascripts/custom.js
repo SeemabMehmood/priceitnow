@@ -7,8 +7,6 @@ $(document).on('turbolinks:load', function() {
     var theme_g1 = price_chart.createLinearGradient(0,0,500,0);
     theme_g1.addColorStop(0,'rgba(29, 233, 182, 0.4)');
     theme_g1.addColorStop(1,'rgba(29, 196, 233, 0.5)');
-    console.log($(price_chart).data('labels'))
-    console.log($(price_chart).data('prices'))
     var data1 = {
                   labels: $('#price_variation_chart').data('labels'),
                   datasets: [

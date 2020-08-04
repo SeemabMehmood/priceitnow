@@ -19,6 +19,7 @@ gem 'roo', '~> 2.8.0'
 gem 'devise'
 gem 'select2-rails'
 gem 'nokogiri'
+gem 'font_awesome5_rails'
 gem 'whenever', require: false
 
 group :development, :test do
