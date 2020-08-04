@@ -13,6 +13,10 @@ class HandbagsController < ApplicationController
   end
 
   def show
+    @handbag = Handbag.find(params[:id])
+    prices  = @handbag.prices.order('created_at ASC')
+    @prices = prices.pluck(:price).map(&:to_i)
+    @labels = prices.pluck(:created_at).map { |d| d.strftime('%d %B') }.uniq
   end
 
   def filter_results

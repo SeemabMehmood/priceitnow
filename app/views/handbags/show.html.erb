@@ -1,0 +1,110 @@
+<div class="pcoded-main-container">
+  <div class="pcoded-wrapper">
+    <div class="pcoded-content">
+      <div class="pcoded-inner-content">
+        <div class="main-body">
+          <div class="page-wrapper">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="bag-name"><%= @handbag.name %></h5>
+                    <div class="card-header-right"></div>
+                  </div>
+                  <div class="card-block">
+                    <div class="row mb-4">
+                      <div class="col-4">
+                        <p>Brand:</p><h6><%= @handbag.brand || 'N/A' %></h6>
+                      </div>
+                      <div class="col-4">
+                        <p>Model:</p><h6><%= @handbag.model || 'N/A' %></h6>
+                      </div>
+                       <div class="col-4">
+                        <p>Color:</p><h6><%= @handbag.color&.humanize || 'N/A' %></h6>
+                      </div>
+                    </div>
+
+                    <div class="row mb-4">
+                      <div class="col-4">
+                        <p>Cost:</p><h6><%= @handbag.cost || 'N/A' %></h6>
+                      </div>
+                      <div class="col-4">
+                        <p>Condition:</p><h6><%= @handbag.condition || 'N/A' %></h6>
+                      </div>
+                       <div class="col-4">
+                        <p>Material:</p><h6><%= @handbag.material || 'N/A' %></h6>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-4">
+                        <p>Length:</p><h6><%= @handbag.length || 'N/A' %></h6>
+                      </div>
+                      <div class="col-4">
+                        <p>Width:</p><h6><%= @handbag.width || 'N/A' %></h6>
+                      </div>
+                       <div class="col-4">
+                        <p>Height:</p><h6><%= @handbag.height || 'N/A' %></h6>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-4">
+                        <p>Reference No:</p><h6><%= @handbag.reference_no || 'N/A' %></h6>
+                      </div>
+                      <div class="col-4">
+                        <p>Image:</p><h6><%= @handbag.image || 'N/A' %></h6>
+                      </div>
+                       <div class="col-4">
+                        <p>Website:</p><h6><%= @handbag.website || 'N/A' %></h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h5>All Prices</h5>
+                    <div class="card-header-right"></div>
+                  </div>
+                  <div class="card-block">
+                    <div class="table-responsive mt-3">
+                      <table class="display table nowrap table-striped table-hover dataTable">
+                        <thead>
+                          <tr>
+                            <th scope="col">Price</th>
+                            <th scope="col">Added At</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% @handbag.prices.each do |price| %>
+                            <tr>
+                              <td><%= price.currency %><%= price.price %></td>
+                              <td><%= price.created_at.strftime('%d-%m-%Y at %I:%H%p') %></td>
+                            </tr>
+                          <% end %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h5>Price Variation Graph</h5>
+                  </div>
+                  <div class="card-block">
+                    <canvas id="price_variation_chart" width="1066" height="300" data-prices="<%= @prices %>" data-labels="<%= @labels %>"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
