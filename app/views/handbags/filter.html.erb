@@ -14,29 +14,29 @@
                   <div class="card-block">
                     <%= form_tag filter_results_handbags_path, method: :post, remote: true do %>
                       <div class="row">
-                        <div class="col-xl-3 col-md-4" data-select2-id="40">
+                        <div class="col-xl-3 col-md-4 mb-3" data-select2-id="40">
                           <h6>Brand</h6>
                           <%= select_tag :brand, options_for_select(Handbag::BRAND.sort), prompt: 'Select', class: "form-control select2 col-sm-12" %>
                         </div>
-                        <div class="col-xl-3 col-md-3" data-select2-id="40">
+                        <div class="col-xl-3 col-md-3 mb-3" data-select2-id="40">
                           <h6>Model</h6>
                           <%= select_tag :model, options_for_select(Handbag.models), class: "form-control select2 col-sm-12", multiple: true %>
                         </div>
-                        <div class="col-xl-2 col-md-2" data-select2-id="40">
+                        <div class="col-xl-2 col-md-2 mb-3" data-select2-id="40">
                           <h6>Color</h6>
                           <%= select_tag :color, options_for_select(Handbag.colors.map {|c| [c.titleize, c]}), class: "form-control select2 col-sm-12", multiple: true %>
                         </div>
                         <div class="col-xl-4 col-md-3" data-select2-id="40">
                           <div class="row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 mb-3">
                               <h6>Length (cm)</h6>
                               <%= select_tag :length, options_for_select(Handbag.lengths), prompt: 'Select', class: "form-control select2" %>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 mb-3">
                               <h6>Width (cm)</h6>
                               <%= select_tag :width, options_for_select(Handbag.widths), prompt: 'Select', class: "form-control select2" %>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 mb-3">
                               <h6>Height (cm)</h6>
                               <%= select_tag :height, options_for_select(Handbag.heights), prompt: 'Select', class: "form-control select2" %>
                             </div>

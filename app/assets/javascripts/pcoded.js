@@ -1,5 +1,5 @@
 "use strict";
-$(document).ready(function() {
+$(document).on('turbolinks:load', function() {
     togglemenu();
     menuhrres();
     var vw = $(window)[0].innerWidth;
@@ -437,14 +437,14 @@ $("#pcoded").pcodedmenu({
     SubMenuTrigger: 'click',
 });
 // menu [ Mobile ]
-$("#mobile-collapse,#mobile-collapse1").click(function(e) {
-    var vw = $(window)[0].innerWidth;
-    if (vw < 992) {
-        $(".pcoded-navbar").toggleClass('mob-open');
-        e.stopPropagation();
-    }
-});
-$(window).ready(function() {
+$(document).on('turbolinks:load', function(){
+    $("#mobile-collapse,#mobile-collapse1").click(function(e) {
+        var vw = $(window)[0].innerWidth;
+        if (vw < 992) {
+            $(".pcoded-navbar").toggleClass('mob-open');
+            e.stopPropagation();
+        }
+    });
     var vw = $(window)[0].innerWidth;
     $(".pcoded-navbar").on('click tap', function(e) {
         e.stopPropagation();
@@ -461,4 +461,5 @@ $(window).ready(function() {
     $("#mobile-header").on('click', function() {
         $(".navbar-collapse,.m-header").slideToggle();
     });
+
 });
