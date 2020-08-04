@@ -6246,16 +6246,6 @@ body.layout-8 .card:hover {
   -webkit-transition: all ease-in 0.3s;
   transition: all ease-in 0.3s;
 }
-#task-container li.complete:before {
-  background: url("../images/complete.png") no-repeat;
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  content: "";
-  width: 55px;
-  height: 55px;
-  background-size: 100%;
-}
 #task-container li.complete p {
   text-decoration: line-through;
 }
