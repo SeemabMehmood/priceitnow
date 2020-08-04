@@ -17,6 +17,7 @@ gem 'roo', '~> 2.8.0'
 gem 'devise'
 gem 'select2-rails'
 gem 'nokogiri'
+gem 'whenever', require: false
 
 group :development, :test do
   gem 'byebug', platform: :mri
