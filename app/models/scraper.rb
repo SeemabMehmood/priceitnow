@@ -152,11 +152,11 @@ class Scraper < ApplicationRecord
         price = price.gsub(',', '').gsub(/\s+/, "")
         persisted_handbag = Handbag.find_by(product_id: product_id)
         if persisted_handbag.present?
-          next if persisted_handbag.prices.latest.price == price[1..-1]
-          persisted_handbag.prices.create(price: price[1..-1], currency: '$')
+          next if persisted_handbag.prices.latest.price == price
+          persisted_handbag.prices.create(price: price, currency: '$')
         else
           handbag = Handbag.create(name: name, website: website, image: image, product_id: product_id, brand: brand)
-          handbag.prices.create(price: price[1..-1], currency: '$')
+          handbag.prices.create(price: price, currency: '$')
         end
       end
       break if doc.css('.toolbar-products').css('.pages-items').css('.pages-item-next').blank?
