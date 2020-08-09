@@ -145,10 +145,12 @@ class Scraper < ApplicationRecord
         name  = bag_div.css('.product-item-details').css('.product-item-link').text.strip
         image = bag_div.css('.images-container').css('.product-image-wrapper').css('picture')[0].css('source').attribute('data-srcset').value
         brand = bag_div.css('.product-item-details').css('.brand').text.strip
-        product_id = bag_div.css('.product-item-details').css('.price-final_price').attribute('data-product-id').value
-        price = bag_div.css('.product-item-details').css('.price-final_price').css('.price-wrapper').attribute('data-price-amount').value.gsub(',', '').gsub(/\s+/, "")
-        persisted_handbag = Handbag.find_by(product_id: product_id)
+        product_id = bag_div.css('.product-item-details').css('.price-final_price').attribute('data-product-id')&.value
+        price = bag_div.css('.product-item-details').css('.price-final_price').css('.price-wrapper').attribute('data-price-amount')&.value
+        next unless price.present?
 
+        price = price.gsub(',', '').gsub(/\s+/, "")
+        persisted_handbag = Handbag.find_by(product_id: product_id)
         if persisted_handbag.present?
           next if persisted_handbag.prices.latest.price == price[1..-1]
           persisted_handbag.prices.create(price: price[1..-1], currency: '$')
@@ -166,6 +168,9 @@ class Scraper < ApplicationRecord
   def self.scrape_prices_data
     scrape_collector_square_price_data
     scrape_from_shop_rebag
+    scrape_from_fashion_phile
+    scrape_from_yoogiscloset
+    scrape_from_whatgoesaroundnyc
   end
 
   private
