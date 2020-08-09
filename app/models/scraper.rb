@@ -132,6 +132,37 @@ class Scraper < ApplicationRecord
     end
   end
 
+  def self.scrape_from_whatgoesaroundnyc
+    uri = 'https://www.whatgoesaroundnyc.com/bags.html'
+    html = open(uri)
+    doc  = Nokogiri::HTML(html)
+    all_handbags = doc.css('.products').css('.item')
+    page_num = 1
+
+    while all_handbags.present?
+      all_handbags.each do |bag_div|
+        website = bag_div.css('.product-item-details').css('.product-item-link').attribute('href').value
+        name  = bag_div.css('.product-item-details').css('.product-item-link').text.strip
+        image = bag_div.css('.images-container').css('.product-image-wrapper').css('picture')[0].css('source').attribute('data-srcset').value
+        brand = bag_div.css('.product-item-details').css('.brand').text.strip
+        product_id = bag_div.css('.product-item-details').css('.price-final_price').attribute('data-product-id').value
+        price = bag_div.css('.product-item-details').css('.price-final_price').css('.price-wrapper').attribute('data-price-amount').value.gsub(',', '').gsub(/\s+/, "")
+        persisted_handbag = Handbag.find_by(product_id: product_id)
+
+        if persisted_handbag.present?
+          next if persisted_handbag.prices.latest.price == price[1..-1]
+          persisted_handbag.prices.create(price: price[1..-1], currency: '$')
+        else
+          handbag = Handbag.create(name: name, website: website, image: image, product_id: product_id, brand: brand)
+          handbag.prices.create(price: price[1..-1], currency: '$')
+        end
+      end
+      page_num += 1
+      doc  = Nokogiri::HTML(open("#{uri}?p=#{page_num}"))
+      all_handbags = doc.css('.products-grid').css('.item')
+    end
+  end
+
   def self.scrape_prices_data
     scrape_collector_square_price_data
     scrape_from_shop_rebag
