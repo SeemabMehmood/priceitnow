@@ -7,7 +7,7 @@
   theme_g1.addColorStop(0,'rgba(29, 233, 182, 0.4)');
   theme_g1.addColorStop(1,'rgba(29, 196, 233, 0.5)');
   var data1 = {
-                labels: [0, <%= @min_price %>, <%= @avg_price %>, <%= @max_price %>],
+                labels: <%= @range %>,
                 datasets: [
                   {
                     label: "<%= params['brand'] || params['model'] %>",
@@ -15,13 +15,40 @@
                     fill: false,
                     borderWidth: 4,
                     borderColor: "#04a9f5",
-                    backgroundColor:"#04a9f5",
-                    tooltips: {
-                      enabled: false
-                    }
+                    backgroundColor:"#04a9f5"
                   }]
                 };
-  var new_price_chart = new Chart(price_chart, { type: 'line', data: data1, responsive: true });
+  var new_price_chart = new Chart(price_chart,
+                                  {
+                                    type: 'line',
+                                    data: data1,
+                                    responsive: true,
+                                    options: {
+                                      tooltips: {
+                                        callbacks: {
+                                          title: function(tooltipItem, data) {
+                                            return '';
+                                          },
+                                          label: function(tooltipItem, data) {
+                                            return "Price:" + data['datasets'][0]['data'][tooltipItem['index']];
+                                          }
+                                        },
+                                      },
+                                      scales: {
+                                        xAxes: [{
+                                          display: false,
+                                          gridLines: {
+                                            display: false
+                                          }
+                                        }],
+                                        yAxes: [{
+                                          gridLines: {
+                                            display: false
+                                          }
+                                        }]
+                                      }
+                                    }
+                                  });
 <% else %>
   $('#results').html("<p>No handbags found.</p>");
 <% end %>

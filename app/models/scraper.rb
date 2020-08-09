@@ -103,7 +103,7 @@ class Scraper < ApplicationRecord
         image = bag_div.css('.product-image-wrapper').css('.primary_image').attribute('src').value
         brand = bag_div.css('.item-main-info').css('.designer-name').text
         condition = bag_div.css('.product-list-attributes').css('.product-condition').children.children.text
-        product_id = bag_div.css('.item-main-info').css('.fav-outer-container').css('.favorites-toggle').attribute('data-wishlist-product-id').value
+        product_id = bag_div.css('.item-main-info').css('.fav-outer-container').css('.favorites-toggle').attribute('data-wishlist-product-id')&.value
 
         price = bag_div.css('.price-box').css('.special-price').css('.price')
         if price.length > 1
