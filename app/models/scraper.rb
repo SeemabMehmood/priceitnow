@@ -50,7 +50,7 @@ class Scraper < ApplicationRecord
   def self.scrape_from_fashion_phile
     uri = 'https://www.fashionphile.com/shop/categories/handbag-styles/'
 
-    browser = Watir::Browser.new
+    browser = Watir::Browser.new :chrome, args: %w[--headless --no-sandbox --disable-dev-shm-usage --disable-gpu --remote-debugging-port=9222]
     browser.goto uri
     sleep 10
 
@@ -79,7 +79,7 @@ class Scraper < ApplicationRecord
       end
       browser.close
 
-      browser = Watir::Browser.new
+      browser = Watir::Browser.new :chrome, args: %w[--headless --no-sandbox --disable-dev-shm-usage --disable-gpu --remote-debugging-port=9222]
       page_num += 1
       browser.goto "#{uri}?page=#{page_num}"
       sleep 10
