@@ -21,6 +21,7 @@ gem 'select2-rails'
 gem 'nokogiri'
 gem 'font_awesome5_rails'
 gem 'whenever', require: false
+gem 'watir'
 
 group :development, :test do
   gem 'byebug', platform: :mri

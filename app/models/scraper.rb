@@ -1,5 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
+require 'watir'
 
 class Scraper < ApplicationRecord
   def self.scrape_collector_square_price_data
@@ -43,6 +44,48 @@ class Scraper < ApplicationRecord
       page_num += 1
       doc  = Nokogiri::HTML(open("#{uri}?page=#{page_num}"))
       all_handbags = doc.css('#bc-sf-filter-products').css('li')
+    end
+  end
+
+  def self.scrape_from_fashion_phile
+    uri = 'https://www.fashionphile.com/shop/categories/handbag-styles/'
+
+    browser = Watir::Browser.new
+    browser.goto uri
+    sleep 10
+
+    doc  = Nokogiri::HTML(browser.html)
+    all_handbags = doc.css('.product_container')
+    page_num = 1
+
+    while all_handbags.present?
+      all_handbags.each do |bag_div|
+        website = bag_div.css('.thumbnail').css('a').attribute('href').value
+        image = bag_div.css('.thumbnail').css('img').attribute('src').value
+        name = bag_div.css('.caption').css('.product-title').attribute('content').value.strip
+        brand = bag_div.css('.caption').css('.brand').text
+        product_id = website.split('-').last
+        price = bag_div.css('.caption').css('.sale-price').text.gsub(',', '').gsub(/\s+/, "")
+        persisted_handbag = Handbag.find_by(product_id: product_id)
+        puts product_id
+
+        if persisted_handbag.present?
+          next if persisted_handbag.prices.latest.price == price[1..-1]
+          persisted_handbag.prices.create(price: price[1..-1], currency: price[0])
+        else
+          handbag = Handbag.create(name: name, website: website, product_id: product_id, brand: brand, image: image)
+          handbag.prices.create(price: price[1..-1], currency: price[0])
+        end
+      end
+      browser.close
+
+      browser = Watir::Browser.new
+      page_num += 1
+      browser.goto "#{uri}?page=#{page_num}"
+      sleep 10
+
+      doc  = Nokogiri::HTML(browser.html)
+      all_handbags = doc.css('.product_container')
     end
   end
 
