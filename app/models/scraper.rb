@@ -159,6 +159,8 @@ class Scraper < ApplicationRecord
           handbag.prices.create(price: price[1..-1], currency: '$')
         end
       end
+      break if doc.css('.toolbar-products').css('.pages-items').css('.pages-item-next').blank?
+
       page_num += 1
       doc  = Nokogiri::HTML(open("#{uri}?p=#{page_num}"))
       all_handbags = doc.css('.products-grid').css('.item')
