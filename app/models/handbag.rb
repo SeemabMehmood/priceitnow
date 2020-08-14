@@ -40,7 +40,7 @@ class Handbag < ApplicationRecord
 
   def self.filter_by(params)
     handbags = []
-    handbags = self.where('name LIKE ?', "%#{params["brand"]}%") if params["brand"].present?
+    handbags = self.where('lower(name) LIKE ?', "%#{params["brand"].downcase}%").or(self.where('lower(brand) LIKE ?', params["brand"].downcase)).order(:created_at) if params["brand"].present?
     return [] if handbags.blank? && params["brand"].present?
     if params["model"].present?
       if handbags.any?
