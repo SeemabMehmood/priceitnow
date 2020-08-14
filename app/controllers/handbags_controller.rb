@@ -26,7 +26,7 @@ class HandbagsController < ApplicationController
     avg_price = avg_prices.any? ? avg_prices.sum / avg_prices.length : 0
     @max_price_handbag = Handbag.max_price_handbag(@handbags, @max_price)
     @avg_price_handbag = Handbag.avg_price_handbag(@handbags, avg_price, @max_price)
-    @min_price_handbag = Handbag.max_price_handbag(@handbags)
+    @min_price_handbag = Handbag.min_price_handbag(@handbags)
     @range = (0..@max_price).step(@max_price/@handbags.count).to_a
     @prices_data = @handbags.map { |h| h.prices.pluck(:price) }.flatten.uniq.map(&:to_i).sort
   end
