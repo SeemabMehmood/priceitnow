@@ -26,16 +26,30 @@ class Handbag < ApplicationRecord
   end
 
   def min_price
-    prices.pluck(:price).map(&:to_i).min
+    prices.pluck(:price).map(&:to_f).min
   end
 
   def max_price
-    prices.pluck(:price).map(&:to_i).max
+    prices.pluck(:price).map(&:to_f).max
   end
 
   def avg_price
-    plucked_prices = self.prices.pluck(:price).map(&:to_i)
+    plucked_prices = self.prices.pluck(:price).map(&:to_f)
     plucked_prices.sum / plucked_prices.length
+  end
+
+  def self.max_price_handbag(handbags, max_price)
+    handbags.includes(:prices).where(prices: { price: max_price }).last
+  end
+
+  def self.min_price_handbag(handbags)
+    bags = handbags.includes(:prices)
+    bags.where(prices: { price: bags.map(&:min_price).min }).last
+  end
+
+  def self.avg_price_handbag(handbags, avg_price, max_price)
+    bags = handbags.includes(:prices)
+    bags.where('prices.price < ? AND prices.price > ?', max_price, avg_price).references(:prices).last
   end
 
   def self.filter_by(params)
